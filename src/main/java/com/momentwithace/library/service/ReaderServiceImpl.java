@@ -11,6 +11,7 @@ import java.util.Optional;
 
 public class ReaderServiceImpl implements ReaderService{
     private ModelMapper modelMapper;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     private ReaderRepository readerRepository;
     @Override
@@ -21,6 +22,7 @@ public class ReaderServiceImpl implements ReaderService{
 
 
         Reader newReader = modelMapper.map(registerRequest, Reader.class);
+        String encodedPassword = bCryptPasswordEncoder.
 
         return null;
     }
