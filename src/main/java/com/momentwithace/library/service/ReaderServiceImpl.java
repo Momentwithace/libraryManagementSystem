@@ -29,8 +29,7 @@ public class ReaderServiceImpl implements ReaderService{
         newReader.setPassword(encodedPassword);
 
         Reader savedReader = readerRepository.save(newReader);
-        RegisterResponse registerResponse = new RegisterResponse("Reader with "+ savedReader.getFirstname()+" successfully registered!");
 
-        return registerResponse;
+        return new RegisterResponse("Reader with "+ savedReader.getFirstname()+" successfully registered!");
     }
 }
