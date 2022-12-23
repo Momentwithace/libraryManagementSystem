@@ -1,5 +1,6 @@
 package com.momentwithace.library.service;
 
+import com.momentwithace.library.data.dtos.request.LoginRequest;
 import com.momentwithace.library.data.dtos.request.RegisterRequest;
 import com.momentwithace.library.data.dtos.response.RegisterResponse;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,12 +13,12 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @SpringBootTest
 class ReaderServiceImplTest {
     private RegisterResponse registerResponse;
-    private RegisterRequest registerRequest;
+    private LoginRequest loginRequest;
     @Autowired
     private ReaderService readerService;
     @BeforeEach
     void setUp(){
-        registerRequest = RegisterRequest.builder()
+        RegisterRequest registerRequest = RegisterRequest.builder()
                 .firstname("Ace")
                 .lastname("Adeh")
                 .email("ace@gmail.com")
@@ -27,8 +28,12 @@ class ReaderServiceImplTest {
         registerResponse = readerService.register(registerRequest);
     }
     @Test
-    void registerReaderTest(){
+    void registerUserTest(){
         assertThat(registerResponse).isNotNull();
     }
 
+    @Test
+    void loginUserTest(){
+        LoginResponse loginResponse = readerService.login(loginRequest);
+    }
 }
