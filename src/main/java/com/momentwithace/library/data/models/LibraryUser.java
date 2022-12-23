@@ -2,15 +2,16 @@ package com.momentwithace.library.data.models;
 
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.MappedSuperclass;
 import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@MappedSuperclass
 public class LibraryUser {
     private String firstname;
     private String lastname;
