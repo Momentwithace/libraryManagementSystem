@@ -6,11 +6,13 @@ import com.momentwithace.library.data.models.Reader;
 import com.momentwithace.library.data.repository.ReaderRepository;
 import com.momentwithace.library.exception.LibrarySystemException;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Optional;
 
 public class ReaderServiceImpl implements ReaderService{
     private ModelMapper modelMapper;
+    private RegisterResponse registerResponse;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     private ReaderRepository readerRepository;
@@ -20,10 +22,13 @@ public class ReaderServiceImpl implements ReaderService{
         if(reader.isPresent())
             throw new LibrarySystemException("Reader already exit");
 
-
         Reader newReader = modelMapper.map(registerRequest, Reader.class);
-        String encodedPassword = bCryptPasswordEncoder.
+        String encodedPassword = bCryptPasswordEncoder.encode(newReader.getPassword());
+        newReader.setPassword(encodedPassword);
 
-        return null;
+        Reader savedReader = readerRepository.save(newReader);
+        registerResponse = new RegisterResponse("Reader with "+ savedReader.getFirstname()+" successfully registered!");
+
+        return registerResponse;
     }
 }
