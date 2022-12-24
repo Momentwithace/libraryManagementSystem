@@ -56,14 +56,14 @@ public class ReaderServiceImpl implements ReaderService{
 
     @Override
     public UpdateResponse updateProfile(UpdateUserDetails updateUserDetails) {
-        Reader user = readerRepository.findByEmail(updateUserDetails.getEmail()).orElseThrow(() ->
+        Reader userToUpdate = readerRepository.findByEmail(updateUserDetails.getEmail()).orElseThrow(() ->
                 new LibrarySystemException("User with "+updateUserDetails.getEmail()+ " Does not exist!"));
 
-        Set<Address> userAddressSet = user.getAddressSet();
+        Set<Address> userAddressSet = userToUpdate.getAddressSet();
 
         Optional<Address> foundAddress = userAddressSet.stream().findFirst();
         foundAddress.ifPresent(address -> applyAddressUpdate(address, updateUserDetails));
-        readerRepository.save(user);
+        readerRepository.save(userToUpdate);
         return UpdateResponse.builder()
                 .message("User with "+updateUserDetails.getEmail()+"Account successfully updated!")
                 .build();
