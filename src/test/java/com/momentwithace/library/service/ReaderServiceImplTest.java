@@ -67,5 +67,6 @@ class ReaderServiceImplTest {
                 .build();
 
         updateResponse = readerService.updateProfile(updateUserDetails);
+        assertThat(updateUserDetails).isNotNull();
     }
 }

@@ -6,6 +6,7 @@ import com.momentwithace.library.data.dtos.request.UpdateUserDetails;
 import com.momentwithace.library.data.dtos.response.LoginResponse;
 import com.momentwithace.library.data.dtos.response.RegisterResponse;
 import com.momentwithace.library.data.dtos.response.UpdateResponse;
+import com.momentwithace.library.data.models.Address;
 import com.momentwithace.library.data.models.Reader;
 import com.momentwithace.library.data.repository.ReaderRepository;
 import com.momentwithace.library.exception.LibrarySystemException;
@@ -15,6 +16,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.Set;
+
 @Service
 @AllArgsConstructor
 public class ReaderServiceImpl implements ReaderService{
@@ -55,8 +58,24 @@ public class ReaderServiceImpl implements ReaderService{
     public UpdateResponse updateProfile(UpdateUserDetails updateUserDetails) {
         Reader user = readerRepository.findByEmail(updateUserDetails.getEmail()).orElseThrow(() ->
                 new LibrarySystemException("User with "+updateUserDetails.getEmail()+ " Does not exist!"));
-//        Set<Address> addressSet = user.g
-        return null;
+
+        Set<Address> userAddressSet = user.getAddressSet();
+
+        Optional<Address> foundAddress = userAddressSet.stream().findFirst();
+        foundAddress.ifPresent(address -> applyAddressUpdate(address, updateUserDetails));
+        readerRepository.save(user);
+        return UpdateResponse.builder()
+                .message("User with "+updateUserDetails.getEmail()+"Account successfully updated!")
+                .build();
+    }
+
+    private void applyAddressUpdate(Address address, UpdateUserDetails updateUserDetails) {
+        address.setCity(updateUserDetails.getCity());
+        address.setStreet(updateUserDetails.getStreet());
+        address.setState(updateUserDetails.getState());
+        address.setCountry(updateUserDetails.getCountry());
+
+
     }
 
 

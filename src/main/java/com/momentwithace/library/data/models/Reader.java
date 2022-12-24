@@ -1,10 +1,12 @@
 package com.momentwithace.library.data.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -16,4 +18,7 @@ public class Reader extends LibraryUser{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @OneToMany(fetch = FetchType.EAGER)
+    @Cascade(CascadeType.PERSIST)
+    private Set<Address> addressSet = new HashSet<>();
 }
