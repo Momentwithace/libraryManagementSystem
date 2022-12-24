@@ -53,6 +53,9 @@ public class ReaderServiceImpl implements ReaderService{
 
     @Override
     public UpdateResponse updateProfile(UpdateUserDetails updateUserDetails) {
+        Reader user = readerRepository.findByEmail(updateUserDetails.getEmail()).orElseThrow(() ->
+                new LibrarySystemException("User with "+updateUserDetails.getEmail()+ " Does not exist!"));
+//        Set<Address> addressSet = user.g
         return null;
     }
 
