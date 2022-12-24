@@ -74,6 +74,6 @@ class ReaderServiceImplTest {
 
     @Test
     void deleteUserTest(){
-        DeleteResponse deleteResponse = readerService.deleteUser()
+        DeleteResponse deleteResponse = readerService.deleteUser(deleteUserRequest);
     }
 }

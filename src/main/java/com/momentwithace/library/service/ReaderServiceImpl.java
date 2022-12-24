@@ -1,8 +1,10 @@
 package com.momentwithace.library.service;
 
+import com.momentwithace.library.data.dtos.request.DeleteUserRequest;
 import com.momentwithace.library.data.dtos.request.LoginRequest;
 import com.momentwithace.library.data.dtos.request.RegisterRequest;
 import com.momentwithace.library.data.dtos.request.UpdateUserDetails;
+import com.momentwithace.library.data.dtos.response.DeleteResponse;
 import com.momentwithace.library.data.dtos.response.LoginResponse;
 import com.momentwithace.library.data.dtos.response.RegisterResponse;
 import com.momentwithace.library.data.dtos.response.UpdateResponse;
@@ -67,6 +69,11 @@ public class ReaderServiceImpl implements ReaderService{
         return UpdateResponse.builder()
                 .message("User with "+updateUserDetails.getEmail()+"Account successfully updated!")
                 .build();
+    }
+
+    @Override
+    public DeleteResponse deleteUser(DeleteUserRequest deleteUserRequest) {
+        return null;
     }
 
     private void applyAddressUpdate(Address address, UpdateUserDetails updateUserDetails) {
