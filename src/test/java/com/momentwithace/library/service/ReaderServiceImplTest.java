@@ -1,5 +1,6 @@
 package com.momentwithace.library.service;
 
+import com.momentwithace.library.data.dtos.request.DeleteUserRequest;
 import com.momentwithace.library.data.dtos.request.LoginRequest;
 import com.momentwithace.library.data.dtos.request.RegisterRequest;
 import com.momentwithace.library.data.dtos.request.UpdateUserDetails;
@@ -18,8 +19,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @SpringBootTest
 class ReaderServiceImplTest {
     private RegisterResponse registerResponse;
-    private UpdateResponse updateResponse;
     private RegisterRequest registerRequest;
+    private DeleteUserRequest deleteUserRequest;
     private LoginRequest loginRequest;
     @Autowired
     private ReaderService readerService;
@@ -67,12 +68,12 @@ class ReaderServiceImplTest {
                 .phoneNumber("09035122225")
                 .build();
 
-        updateResponse = readerService.updateProfile(updateUserDetails);
+        UpdateResponse updateResponse = readerService.updateProfile(updateUserDetails);
         assertThat(updateUserDetails).isNotNull();
     }
 
     @Test
     void deleteUserTest(){
-        DeleteResponse deleteResponse =
+        DeleteResponse deleteResponse = readerService.deleteUser()
     }
 }
