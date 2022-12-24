@@ -3,6 +3,7 @@ package com.momentwithace.library.service;
 import com.momentwithace.library.data.dtos.request.LoginRequest;
 import com.momentwithace.library.data.dtos.request.RegisterRequest;
 import com.momentwithace.library.data.dtos.request.UpdateUserDetails;
+import com.momentwithace.library.data.dtos.response.DeleteResponse;
 import com.momentwithace.library.data.dtos.response.LoginResponse;
 import com.momentwithace.library.data.dtos.response.RegisterResponse;
 import com.momentwithace.library.data.dtos.response.UpdateResponse;
@@ -68,5 +69,10 @@ class ReaderServiceImplTest {
 
         updateResponse = readerService.updateProfile(updateUserDetails);
         assertThat(updateUserDetails).isNotNull();
+    }
+
+    @Test
+    void deleteUserTest(){
+        DeleteResponse deleteResponse =
     }
 }
