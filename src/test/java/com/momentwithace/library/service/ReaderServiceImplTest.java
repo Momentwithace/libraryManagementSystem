@@ -66,6 +66,6 @@ class ReaderServiceImplTest {
                 .phoneNumber("09035122225")
                 .build();
 
-
+        updateResponse = readerService.updateProfile(updateUserDetails);
     }
 }

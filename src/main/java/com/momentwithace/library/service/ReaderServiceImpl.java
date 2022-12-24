@@ -2,8 +2,10 @@ package com.momentwithace.library.service;
 
 import com.momentwithace.library.data.dtos.request.LoginRequest;
 import com.momentwithace.library.data.dtos.request.RegisterRequest;
+import com.momentwithace.library.data.dtos.request.UpdateUserDetails;
 import com.momentwithace.library.data.dtos.response.LoginResponse;
 import com.momentwithace.library.data.dtos.response.RegisterResponse;
+import com.momentwithace.library.data.dtos.response.UpdateResponse;
 import com.momentwithace.library.data.models.Reader;
 import com.momentwithace.library.data.repository.ReaderRepository;
 import com.momentwithace.library.exception.LibrarySystemException;
@@ -49,6 +51,10 @@ public class ReaderServiceImpl implements ReaderService{
         readerRepository.deleteAll();
     }
 
+    @Override
+    public UpdateResponse updateProfile(UpdateUserDetails updateUserDetails) {
+        return null;
+    }
 
 
 }
