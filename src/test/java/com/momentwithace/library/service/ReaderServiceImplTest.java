@@ -2,7 +2,9 @@ package com.momentwithace.library.service;
 
 import com.momentwithace.library.data.dtos.request.LoginRequest;
 import com.momentwithace.library.data.dtos.request.RegisterRequest;
+import com.momentwithace.library.data.dtos.response.LoginResponse;
 import com.momentwithace.library.data.dtos.response.RegisterResponse;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +27,19 @@ class ReaderServiceImplTest {
                 .password("12345")
                 .build();
 
+        loginRequest = LoginRequest.builder()
+                .email("ace@gmail.com")
+                .password("12345")
+                .build();
+
         registerResponse = readerService.register(registerRequest);
     }
+
+    @AfterEach
+    void tearDown(){
+        readerService.deleteAll();
+    }
+
     @Test
     void registerUserTest(){
         assertThat(registerResponse).isNotNull();
@@ -35,5 +48,6 @@ class ReaderServiceImplTest {
     @Test
     void loginUserTest(){
         LoginResponse loginResponse = readerService.login(loginRequest);
+        assertThat(loginResponse).isNotNull();
     }
 }

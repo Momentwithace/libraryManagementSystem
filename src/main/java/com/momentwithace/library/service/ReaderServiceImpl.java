@@ -1,6 +1,8 @@
 package com.momentwithace.library.service;
 
+import com.momentwithace.library.data.dtos.request.LoginRequest;
 import com.momentwithace.library.data.dtos.request.RegisterRequest;
+import com.momentwithace.library.data.dtos.response.LoginResponse;
 import com.momentwithace.library.data.dtos.response.RegisterResponse;
 import com.momentwithace.library.data.models.Reader;
 import com.momentwithace.library.data.repository.ReaderRepository;
@@ -32,4 +34,20 @@ public class ReaderServiceImpl implements ReaderService{
 
         return new RegisterResponse("Reader with "+ savedReader.getFirstname()+" successfully registered!");
     }
+
+    @Override
+    public LoginResponse login(LoginRequest loginRequest) {
+        Optional<Reader> user = readerRepository.findByEmail(loginRequest.getEmail());
+        if(user.isPresent() && user.get().getPassword().equals(loginRequest.getPassword()))
+            return LoginResponse.builder().message("User logged in successfully").build();
+
+        return LoginResponse.builder().message("User with "+loginRequest.getEmail()+"Not found!").build();
+    }
+
+    @Override
+    public void deleteAll() {
+        readerRepository.deleteAll();
+    }
+
+
 }
