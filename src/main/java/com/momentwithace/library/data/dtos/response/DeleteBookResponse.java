@@ -1,12 +1,12 @@
 package com.momentwithace.library.data.dtos.response;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class DeleteBookResponse {
     private String message;
 }

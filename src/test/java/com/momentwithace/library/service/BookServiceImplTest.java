@@ -36,6 +36,7 @@ class BookServiceImplTest {
 
     @AfterEach
     void tearDown() {
+        bookService.deleteAll();
     }
 
     @Test
@@ -45,6 +46,7 @@ class BookServiceImplTest {
 
     @Test
     void deleteBookTest(){
-        DeleteBookResponse deleteBookResponse = bookRepository.deleteBookByBookIsbn(123456789L);
+        DeleteBookResponse deleteBookResponse = bookService.deleteBookByBookIsbn(123456789L);
+        assertThat(deleteBookResponse).isNotNull();
     }
 }
