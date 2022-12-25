@@ -10,6 +10,6 @@ import lombok.*;
 public class RegisterBookRequest {
     private String bookTitle;
     private String bookAuthor;
-    private Long isbn;
+    private Long BookIsbn;
     private String edition;
 }

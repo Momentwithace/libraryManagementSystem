@@ -6,31 +6,36 @@ import com.momentwithace.library.data.repository.BookRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.stereotype.Service;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+@SpringBootTest
 class BookServiceImplTest {
     private BookRepository bookRepository;
-    private RegisterBookRequest registerBookRequest;
+    @Autowired
     private BookService bookService;
+    private RegisterBookResponse registerBookResponse;
 
     @BeforeEach
     void setUp() {
-        registerBookRequest = RegisterBookRequest.builder()
+        RegisterBookRequest registerBookRequest = RegisterBookRequest.builder()
                 .bookTitle("SpringBoot in Java")
-                .isbn(123456789L)
+                .BookIsbn(123456789L)
                 .edition("2022")
                 .bookAuthor("Micheal Boyo")
                 .build();
+        registerBookResponse = bookService.registerBook(registerBookRequest);
     }
 
     @AfterEach
     void tearDown() {
-        bookRepository.deleteAll();
     }
 
     @Test
     void registerBook(){
-        RegisterBookResponse registerBookResponse = bookService.registerBook(registerBookRequest);
+        assertThat(registerBookResponse).isNotNull();
     }
 }
