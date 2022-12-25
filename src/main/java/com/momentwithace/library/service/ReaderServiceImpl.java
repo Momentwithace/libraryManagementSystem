@@ -1,6 +1,5 @@
 package com.momentwithace.library.service;
 
-import com.momentwithace.library.data.dtos.request.DeleteUserRequest;
 import com.momentwithace.library.data.dtos.request.LoginRequest;
 import com.momentwithace.library.data.dtos.request.RegisterRequest;
 import com.momentwithace.library.data.dtos.request.UpdateUserDetails;
@@ -90,4 +89,16 @@ public class ReaderServiceImpl implements ReaderService{
                 .message("User with "+userToDelete.getClass()+"Successfully deleted!")
                 .build();
     }
+
+    @Override
+    public Optional<Reader> getUserByEmail(String email) {
+        Optional<Reader> userToGet = readerRepository.findByEmail(email);
+        if(userToGet.isEmpty())
+            throw new UserNotFoundException("User with "+email+" Does not exist!");
+
+        return readerRepository.findByEmail(String.valueOf(userToGet.get()));
+    }
+
+//      return bookRepository.findBookByIsbn(bookIsbn).orElseThrow(()->
+//      new BookNotFoundException(String.format("product with id %d not found", bookIsbn)));
 }

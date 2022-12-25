@@ -8,13 +8,15 @@ import com.momentwithace.library.data.dtos.response.DeleteResponse;
 import com.momentwithace.library.data.dtos.response.LoginResponse;
 import com.momentwithace.library.data.dtos.response.RegisterResponse;
 import com.momentwithace.library.data.dtos.response.UpdateResponse;
+import com.momentwithace.library.data.models.Reader;
 import com.momentwithace.library.exception.LibrarySystemException;
-import lombok.var;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -82,8 +84,10 @@ class ReaderServiceImplTest {
 
     @Test
     void getUserByEmailTest(){
-        var foundUser = readerService.getUserByEmail("ace@gmail.com");
+        Optional<Reader> foundUser = readerService.getUserByEmail("ace@gmail.com");
+        assertThat(foundUser).isNotNull();
     }
+
 
 //    @Test
 //    void getBookByIsbnTest(){
