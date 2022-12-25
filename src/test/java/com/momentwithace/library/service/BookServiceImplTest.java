@@ -1,7 +1,9 @@
 package com.momentwithace.library.service;
 
 import com.momentwithace.library.data.dtos.request.RegisterBookRequest;
+import com.momentwithace.library.data.dtos.response.DeleteBookResponse;
 import com.momentwithace.library.data.dtos.response.RegisterBookResponse;
+import com.momentwithace.library.data.models.Book;
 import com.momentwithace.library.data.repository.BookRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,6 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -37,5 +41,10 @@ class BookServiceImplTest {
     @Test
     void registerBook(){
         assertThat(registerBookResponse).isNotNull();
+    }
+
+    @Test
+    void deleteBookTest(){
+        DeleteBookResponse deleteBookResponse = bookRepository.deleteBookByBookIsbn(123456789L);
     }
 }
