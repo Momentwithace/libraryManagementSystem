@@ -88,10 +88,4 @@ class ReaderServiceImplTest {
         assertThat(foundUser).isNotNull();
     }
 
-
-//    @Test
-//    void getBookByIsbnTest(){
-//        bookService.registerBook(registerBook);
-//        var foundBook = bookService.getBookByIsbn(123456789L);
-//        assertThat(foundBook).isNotNull();
 }

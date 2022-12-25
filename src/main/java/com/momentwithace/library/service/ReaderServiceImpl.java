@@ -99,6 +99,4 @@ public class ReaderServiceImpl implements ReaderService{
         return readerRepository.findByEmail(String.valueOf(userToGet.get()));
     }
 
-//      return bookRepository.findBookByIsbn(bookIsbn).orElseThrow(()->
-//      new BookNotFoundException(String.format("product with id %d not found", bookIsbn)));
 }
