@@ -41,4 +41,14 @@ public class BookServiceImpl implements BookService{
         bookRepository.deleteAll();
     }
 
+    @Override
+    public Optional<Book> getBookByBookIsbn(long bookIsbn) {
+        Optional<Book> bookToGet = bookRepository.findBookByBookIsbn(bookIsbn);
+        if(bookToGet.isEmpty())
+            throw new BookNotFoundException("Book with "+bookIsbn+" not found!");
+
+        return bookRepository.findBookByBookIsbn(bookIsbn);
+    }
+
+
 }

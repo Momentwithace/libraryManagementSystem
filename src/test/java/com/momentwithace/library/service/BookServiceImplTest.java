@@ -49,4 +49,10 @@ class BookServiceImplTest {
         DeleteBookResponse deleteBookResponse = bookService.deleteBookByBookIsbn(123456789L);
         assertThat(deleteBookResponse).isNotNull();
     }
+
+    @Test
+    void getBookTest(){
+        Optional<Book> bookToGet = bookService.getBookByBookIsbn(123456789L);
+        assertThat(bookToGet).isNotEmpty();
+    }
 }
