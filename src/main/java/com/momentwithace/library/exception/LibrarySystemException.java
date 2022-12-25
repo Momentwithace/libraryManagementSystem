@@ -1,6 +1,6 @@
 package com.momentwithace.library.exception;
 
-public class LibrarySystemException extends RuntimeException{
+public class LibrarySystemException extends Exception{
     public LibrarySystemException(String message){
         super(message);
     }

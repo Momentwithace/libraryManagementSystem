@@ -8,6 +8,7 @@ import com.momentwithace.library.data.dtos.response.DeleteResponse;
 import com.momentwithace.library.data.dtos.response.LoginResponse;
 import com.momentwithace.library.data.dtos.response.RegisterResponse;
 import com.momentwithace.library.data.dtos.response.UpdateResponse;
+import com.momentwithace.library.exception.LibrarySystemException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,7 +26,7 @@ class ReaderServiceImplTest {
     @Autowired
     private ReaderService readerService;
     @BeforeEach
-    void setUp(){
+    void setUp() throws LibrarySystemException {
         registerRequest = RegisterRequest.builder()
                 .firstname("Ace")
                 .lastname("Adeh")
@@ -58,7 +59,7 @@ class ReaderServiceImplTest {
     }
 
     @Test
-    void updateUserTest(){
+    void updateUserTest() throws LibrarySystemException {
         UpdateUserDetails updateUserDetails = UpdateUserDetails.builder()
                 .email(registerRequest.getEmail())
                 .buildingNumber(23)
@@ -69,11 +70,12 @@ class ReaderServiceImplTest {
                 .build();
 
         UpdateResponse updateResponse = readerService.updateProfile(updateUserDetails);
-        assertThat(updateUserDetails).isNotNull();
+        assertThat(updateResponse).isNotNull();
     }
 
     @Test
     void deleteUserTest(){
-        DeleteResponse deleteResponse = readerService.deleteUser(deleteUserRequest);
+        DeleteResponse deleteResponse = readerService.deleteUser("ace@gmail.com");
+        assertThat(deleteResponse).isNotNull();
     }
 }

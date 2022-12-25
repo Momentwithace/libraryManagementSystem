@@ -8,18 +8,19 @@ import com.momentwithace.library.data.dtos.response.DeleteResponse;
 import com.momentwithace.library.data.dtos.response.LoginResponse;
 import com.momentwithace.library.data.dtos.response.RegisterResponse;
 import com.momentwithace.library.data.dtos.response.UpdateResponse;
+import com.momentwithace.library.exception.LibrarySystemException;
 import org.springframework.stereotype.Service;
 
 @Service
 public interface ReaderService {
-    RegisterResponse register(RegisterRequest registerRequest);
+    RegisterResponse register(RegisterRequest registerRequest) throws LibrarySystemException;
 
 
     LoginResponse login(LoginRequest loginRequest);
 
     void deleteAll();
 
-    UpdateResponse updateProfile(UpdateUserDetails updateUserDetails);
+    UpdateResponse updateProfile(UpdateUserDetails updateUserDetails) throws LibrarySystemException;
 
-    DeleteResponse deleteUser(DeleteUserRequest deleteUserRequest);
+    DeleteResponse deleteUser(String email);
 }

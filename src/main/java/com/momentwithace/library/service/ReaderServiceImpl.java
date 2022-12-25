@@ -12,6 +12,7 @@ import com.momentwithace.library.data.models.Address;
 import com.momentwithace.library.data.models.Reader;
 import com.momentwithace.library.data.repository.ReaderRepository;
 import com.momentwithace.library.exception.LibrarySystemException;
+import com.momentwithace.library.exception.UserNotFoundException;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -28,7 +29,7 @@ public class ReaderServiceImpl implements ReaderService{
 
     private final ReaderRepository readerRepository;
     @Override
-    public RegisterResponse register(RegisterRequest registerRequest) {
+    public RegisterResponse register(RegisterRequest registerRequest) throws LibrarySystemException {
         Optional<Reader> reader = readerRepository.findByEmail(registerRequest.getEmail());
         if(reader.isPresent())
             throw new LibrarySystemException("Reader already exit");
@@ -57,7 +58,7 @@ public class ReaderServiceImpl implements ReaderService{
     }
 
     @Override
-    public UpdateResponse updateProfile(UpdateUserDetails updateUserDetails) {
+    public UpdateResponse updateProfile(UpdateUserDetails updateUserDetails) throws LibrarySystemException {
         Reader userToUpdate = readerRepository.findByEmail(updateUserDetails.getEmail()).orElseThrow(() ->
                 new LibrarySystemException("User with "+updateUserDetails.getEmail()+ " Does not exist!"));
 
@@ -71,19 +72,22 @@ public class ReaderServiceImpl implements ReaderService{
                 .build();
     }
 
-    @Override
-    public DeleteResponse deleteUser(DeleteUserRequest deleteUserRequest) {
-        return null;
-    }
-
     private void applyAddressUpdate(Address address, UpdateUserDetails updateUserDetails) {
         address.setCity(updateUserDetails.getCity());
         address.setStreet(updateUserDetails.getStreet());
         address.setState(updateUserDetails.getState());
         address.setCountry(updateUserDetails.getCountry());
 
-
     }
 
-
+    @Override
+    public DeleteResponse deleteUser(String email) {
+        Optional<Reader> userToDelete = readerRepository.findByEmail(email);
+        if(userToDelete.isEmpty())
+            throw new UserNotFoundException("User with "+email+" Does not exist!");
+        readerRepository.delete(userToDelete.get());
+        return DeleteResponse.builder()
+                .message("User with "+userToDelete.getClass()+"Successfully deleted!")
+                .build();
+    }
 }

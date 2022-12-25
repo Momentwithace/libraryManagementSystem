@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface ReaderRepository extends JpaRepository<Reader, Long> {
     Optional<Reader> findByEmail(String email);
 
+    void deleteByEmail(String email);
 }
