@@ -9,6 +9,7 @@ import com.momentwithace.library.data.dtos.response.LoginResponse;
 import com.momentwithace.library.data.dtos.response.RegisterResponse;
 import com.momentwithace.library.data.dtos.response.UpdateResponse;
 import com.momentwithace.library.exception.LibrarySystemException;
+import lombok.var;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -78,4 +79,15 @@ class ReaderServiceImplTest {
         DeleteResponse deleteResponse = readerService.deleteUser("ace@gmail.com");
         assertThat(deleteResponse).isNotNull();
     }
+
+    @Test
+    void getUserByEmailTest(){
+        var foundUser = readerService.getUserByEmail("ace@gmail.com");
+    }
+
+//    @Test
+//    void getBookByIsbnTest(){
+//        bookService.registerBook(registerBook);
+//        var foundBook = bookService.getBookByIsbn(123456789L);
+//        assertThat(foundBook).isNotNull();
 }
